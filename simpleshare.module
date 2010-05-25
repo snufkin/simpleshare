@@ -94,8 +94,10 @@ function simpleshare_link($type, $object, $teaser = FALSE) {
  * Implementation of hook_context_link_alter()
  */
 function simpleshare_context_links_alter(&$links) {
-  if ($plugin = context_get_plugin('reaction', 'simpleshare_link')) {
-    $plugin->execute($links);
+  if (function_exists('context_get_plugin')) { // Context 2.x does not implement this function, TODO: context 2 support.
+    if ($plugin = context_get_plugin('reaction', 'simpleshare_link')) {
+      $plugin->execute($links);
+    }
   }
 }
 
