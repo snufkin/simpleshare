@@ -222,9 +222,17 @@ function simpleshare_service_links() {
     }
     if ($methods['reddit']) {
       $query = array('url' => $url, 'title' => $title);
-      $links['methods'] = array(
+      $links['reddit'] = array(
         'title' => t('Reddit'),
         'href' => 'http://www.reddit.com/submit',
+        'query' => drupal_query_string_encode($query),
+      );
+    }
+    if ($methods['digg']) {
+      $query = array('url' => $url);
+      $links['digg'] = array(
+        'title' => t('Digg'),
+        'href' => 'http://digg.com/submit',
         'query' => drupal_query_string_encode($query),
       );
     }
@@ -249,6 +257,7 @@ function simpleshare_methods() {
     'twitter' => t('Twitter'),
     'myspace' => t('MySpace'),
     'reddit' => t('Reddit'),
+    'digg' => t('Digg'),
   );
 }
 
