@@ -64,7 +64,7 @@ function simpleshare_form_alter(&$form, $form_state, $form_id) {
     $form['workflow']['simpleshare_enabled'] = array(
       '#type' => 'radios',
       '#title' => t('Simple Share'),
-      '#description' => t('If checked, offers Share link on full node views. Choose which share methods to expose on the !settings_form.', array('!admin_form' => l(t('Simple Share settings form'), 'admin/settings/simpleshare'))),
+      '#description' => t('If checked, offers Share link on full node views. Choose which share methods to expose on the !admin_form.', array('!admin_form' => l(t('Simple Share settings form'), 'admin/settings/simpleshare'))),
       '#options' => array(0 => t('Disabled'), 1 => t('Enabled')),
       '#default_value' => variable_get('simpleshare_enabled_'. $form['#node_type']->type, 0),
     );
@@ -220,6 +220,14 @@ function simpleshare_service_links() {
         'attributes' => array('target' => '_blank'),
       );
     }
+    if ($methods['reddit']) {
+      $query = array('url' => $url, 'title' => $title);
+      $links['methods'] = array(
+        'title' => t('Reddit'),
+        'href' => 'http://www.reddit.com/submit',
+        'query' => drupal_query_string_encode($query),
+      );
+    }
     drupal_alter('simpleshare_service_links', $links);
     $links = theme('links', $links);
     print theme('simpleshare_popup', $links, $html);
@@ -240,6 +248,7 @@ function simpleshare_methods() {
     'facebook' => t('Facebook'),
     'twitter' => t('Twitter'),
     'myspace' => t('MySpace'),
+    'reddit' => t('Reddit'),
   );
 }
 
