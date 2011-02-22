@@ -9,7 +9,7 @@ Drupal.behaviors.simpleshare = function() {
       // Make an AJAX call for this link.
       var title = $(this).attr('title') ? $(this).attr('title') : $(document).attr('title');
       var url = $(this).attr('href');
-      var services = $(this).attr('rel').split(" ");
+      var services = $(this).attr('rel');
       var ajax_url = Drupal.settings.basePath + 'simpleshare';
       $.get(ajax_url, {'title': title, 'url': url, 'services': services}, function(data) {
         $(document.body).append(data);

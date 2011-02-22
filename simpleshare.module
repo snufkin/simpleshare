@@ -237,8 +237,10 @@ function simpleshare_service_links() {
       );
     }
     if (isset($_GET['services'])) {
-      $services = array_flip($_GET['services']);
-      $links = array_intersect_key($links, $services);
+      $services = array_flip(explode(' ', $_GET['services']));
+      if (!empty($services)) {
+        $links = array_intersect_key($links, $services);
+      }
     }
     drupal_alter('simpleshare_service_links', $links);
     $links = theme('links', $links);
